@@ -6,7 +6,6 @@ tokens = nltk.word_tokenize(noPunct) #tokenize the raw UTF-8 text
 stopword_list=open('/home/mimi/Desktop/RI_Lab/lab01/stopwords_fr.txt', 'r')
 #remove stopWords
 
-
 filtered_words = [] #declare an empty list to hold our filtered words
 for word in tokens: #iterate over all words from the text
     if word not in stopword_list and word.isalpha() and len(word) > 1: #only add words that are not in the French stopwords list, are alphabetic, and are more than 1 character
