@@ -26,7 +26,7 @@ document.
 '''
 loop of the documents
 filesList=['D1','D2','D3']
-for fileName in filesList:   
+for fileName in filesList:   ,
 '''
 def punctuation_removal_funct(textBrute):
     translator = str.maketrans('', '', string.punctuation)
@@ -34,12 +34,12 @@ def punctuation_removal_funct(textBrute):
 def tokenize_Funct(text):
         return  nltk.word_tokenize(text) #tokenize the raw UTF-8 text
 def filter_stopWords_Funct(stopWords_path,tokenes_List):
+        from nltk import FreqDist
         stopword_list=open(stopWords_path, 'r')
         filtered_words = [] #declare an empty list to hold our filtered words
         for word in tokenes_List: #iterate over all words from the text
           if word not in stopword_list and word.isalpha() and len(word) > 1: #only add words that are not in the French stopwords list, are alphabetic, and are more than 1 character
                  filtered_words.append(word) #add word to filter_words list if it meets the above conditions
-        filtered_words.sort() #sort filtered_words list
         return filtered_words
 def stemming_Function(filtered_words):
         stemmed_words = [] #declare an empty list to hold our stemmed words
@@ -47,8 +47,39 @@ def stemming_Function(filtered_words):
         for word in filtered_words:
          stemmed_word=stemmer.stem(word) #stem the word
          stemmed_words.append(stemmed_word) #add it to our stemmed word list
-        stemmed_words.sort() #sort the stemmed_words
-        return stemmed_words 
+        
+        freqdist = nltk.FreqDist(stemmed_words)
+        return freqdist
+
+'''
+def createFrequencyDict_Funct(stems_list):
+        from nltk import defaultdict
+        freq_dict = defaultdict(int)
+        for stem in stems_list:
+                freq_dict[stem] += 1
+        return freq_dict
+'''
+def create_invertedIndeces_Funct(outputFile_path):
+        FileSave=open(outputFile_path+'invertedIndeces.txt','w')
+        #for each file freqDist
+        docIndex=1
+        for target_freqdistr in stems_list:
+                for token in target_freqdistr:                      
+                        string='['+str(token)+','+str(docIndex)+']->'+str(target_freqdistr[token])+'\n'
+                        FileSave.write(string)
+                docIndex +=1 
+        FileSave.close
+
+'''
+        for x in range(0,NbDocs):
+                for target_list in expression_list:
+                        passcreateFrequencyDict_Funct(target_stem)
+                string='['Mot',' x']->',fréquences
+                FileSave.write(string)
+
+        FileSave.close
+'''
+
 
 
 files_path='/home/mimi/Desktop/RI_Lab/corpus/'
@@ -56,8 +87,10 @@ stopWords_path='/home/mimi/Desktop/RI_Lab/lab01/stopwords_fr.txt'
 filesList=['D1','D2','D3']
 noPunct=[]
 tokenes_List=[]
-filtered_words=[]
+filtered_List=[]
 stems_list=[]
+freqDicts_list=[]
+
 for fileName in filesList:  
     with open(files_path+fileName+'.txt',) as myfile:
         bruteText=myfile.read().replace('\n', '')
@@ -69,11 +102,15 @@ for target in noPunct:
         tokenes_List.append(tokenize_Funct(target))
 
 for toks_list in tokenes_List:
-        filtered_words.append(filter_stopWords_Funct(stopWords_path,toks_list))
+        filtered_List.append(filter_stopWords_Funct(stopWords_path,toks_list))
 
-#call stemming function
+for target in filtered_List:
+        stems_list.append(stemming_Function(target))
+
+
+create_invertedIndeces_Funct(files_path)
 '''
-for target_list in words:
-        print(target_list)
+for target_list in stems_list:
+        print(target_list.items())
         print( )
 '''

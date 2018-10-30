@@ -34,6 +34,27 @@ for word in stemmed_words:
 print(freq_dict.items())
 '''
 
+print("********** INDEX DE FREQUENCES DU DOCUMENT ", k, " **********")
+    f = open('D' + str(k), 'r')
+    t = f.read()
+    t = t.lower()
+    i = 0
+    while i < len(t):
+        if t[i] in listCar:
+            t = t.replace(t[i], "")
+        i += 1
+    a = t.split()
+    nb = len(a)
+    for w in a:
+        if not w in stoplist and len(w) > 1:
+            if not (w, k) in freq:
+                freq[w, k] = a.count(w)
+                print(w, freq[w, k])
+    k += 1
+f.close()
+print("Le fichier inverse de la collection")
+print(freq)
+
 
 
 
