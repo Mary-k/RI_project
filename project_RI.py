@@ -50,16 +50,7 @@ def stemming_Function(filtered_words):
         
         freqdist = nltk.FreqDist(stemmed_words)
         return freqdist
-
-'''
-def createFrequencyDict_Funct(stems_list):
-        from nltk import defaultdict
-        freq_dict = defaultdict(int)
-        for stem in stems_list:
-                freq_dict[stem] += 1
-        return freq_dict
-'''
-def create_invertedIndeces_Funct(outputFile_path):
+def invertedIndeces_Funct(outputFile_path):
         FileSave=open(outputFile_path+'invertedIndeces.txt','w')
         #for each file freqDist
         docIndex=1
@@ -69,17 +60,11 @@ def create_invertedIndeces_Funct(outputFile_path):
                         FileSave.write(string)
                 docIndex +=1 
         FileSave.close
-
-'''
-        for x in range(0,NbDocs):
-                for target_list in expression_list:
-                        passcreateFrequencyDict_Funct(target_stem)
-                string='['Mot',' x']->',fréquences
-                FileSave.write(string)
-
-        FileSave.close
-'''
-
+def weighted_invertedIndeces_Funct(Nb_docs,invertedIndeces_file_path):
+        #poids(ti, dj)=(freq(ti,dj)/Max(freq(t, dj))*Log((N/ni) +1)
+        #poids[w, d] = (float(freq[w, d])/max[d]) * log10((float(Nb_docs))/ni[w]+1)
+        for target_freqdistr in stems_list:
+                
 
 
 files_path='/home/mimi/Desktop/RI_Lab/corpus/'
@@ -109,8 +94,3 @@ for target in filtered_List:
 
 
 create_invertedIndeces_Funct(files_path)
-'''
-for target_list in stems_list:
-        print(target_list.items())
-        print( )
-'''
