@@ -79,7 +79,20 @@ def weighted_invertedIndeces_Funct(Nb_docs,invertedIndeces_file_path):
                         FileSave.write(string)
                 docIndex +=1 
         FileSave.close
+def get_documents_List_Funct(term):
+        listOfDocs=[]
+        for index in frequency_file_list:
+                if index[0]==term:
+                        listOfDocs.append(index[1])
+        return listOfDocs
+def and_Funct(a,b):
+        return list(set(a) & set(b))
+def or_Funct(a,b):
+        return list(set().union(a,b))
+def boolean_Retrieval_Model_Funct(boolean_query):
+        decision=False
 
+        return decision
 files_path='/home/mimi/Desktop/RI_Lab/corpus/'
 stopWords_path='/home/mimi/Desktop/RI_Lab/lab01/stopwords_fr.txt'
 filesList=['D1','D2','D3']
@@ -107,6 +120,8 @@ for toks_list in tokenes_List:
 for target in filtered_List:
         stems_list.append(stemming_Function(target))
 
-invertedIndeces_Funct(files_path)
+#invertedIndeces_Funct(files_path)
 
-weighted_invertedIndeces_Funct(3,files_path)
+#weighted_invertedIndeces_Funct(3,files_path)
+
+#print(get_documents_List_Funct('dan'))
