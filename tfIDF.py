@@ -55,25 +55,12 @@ f.close()
 print("Le fichier inverse de la collection")
 print(freq)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def weighted_invertedIndeces_Funct(Nb_docs,invertedIndeces_file_path):
+        #poids(ti, dj)=(freq(ti,dj)/Max(freq(t, dj))*Log((N/ni) +1)
+        #poids[w, d] = (float(
+        # freq[w, d])/max[d]) * log10((float(Nb_docs))/ni[w]+1)
+        #creationOf
+        return 0
 
 '''
     for sent in sents:
@@ -84,3 +71,28 @@ print(freq)
             freq_dict[word] += 1
         else:
 '''
+ string='['+str(token)+','+str(docIndex)+']->'+str(target_freqdistr[token])+'\n'
+                        tempList.append(token)
+                        tempList.append(docIndex-1)
+                        tempList.append(target_freqdistr[token])
+                        print(tempList)
+                        print( )
+                        frequencies_file_list.append(tempList)
+                      #  FileSave.write(string)
+                
+for list_index_1 in frequency_file_list:
+        temp=list_index_1
+        frequency_file_list.remove(list_index_1)
+        temp2.append(temp[0])
+        temp2.append(temp[2])
+        for list_index_2 in frequency_file_list:
+                if list_index_2[0]==temp[0]:
+                        temp2.append(list_index_2[2])
+                        frequency_file_list.remove(list_index_2)
+        invertedIndeces_file_list.append(temp2)
+
+some_dict=dict()
+for lines in some_list:
+    if lines[0] in some_dict:
+        some_dict[lines[0]].append(lines[1])
+        pass
